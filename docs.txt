@@ -1,0 +1,5 @@
+Il progetto è cominciato con l'ideazione di un App con i requisiti di essere una SPA e consumare un API tra le seguenti
+https://any-api.com/ , dopo di che ho deciso di creare un applicativo per il meteo e le news.
+
+Sono partito con una bozza di mockup e poi con le user stories per arrivare a creare una bacheca trello
+stule kanbam con i task suddivisi nel backlog e in "sprint" per importanza e difficolta.
