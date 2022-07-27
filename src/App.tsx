@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getWeather } from "../src/redux/reducers/weatherSlice";
+
 
 function App() {
   // const [loader, setLoader] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
-  const [weatherValue, setweatherValue] = useState([]);
+  // const [weatherValue, setweatherValue] = useState([]);
+
+  // redux
+  const list = useSelector((state: any) => state.weather.weatherList);
+  const dispatch = useDispatch();
 
   const sendCity = async () => {
     try {
@@ -12,7 +19,7 @@ function App() {
         `http://api.weatherstack.com/current?access_key=8e2acd1175ae80673f3f74e84c2f3412&query=${inputValue}`
       );
       // console.log(resp.data);[]
-      setweatherValue(resp.data);
+      dispatch(getWeather(resp?.data?.current));
       // setLoader(true);
     } catch (error: any) {
       console.log(error.data);
@@ -45,6 +52,22 @@ function App() {
     Cerca
     </button>
     </div>
+
+    <div>
+
+      {list.temperature}
+    
+      {/* {list?.map((v, index)=> {
+        console.log(v)
+        return(
+
+          <div>
+          
+          </div>
+        );
+      } )} */}
+    </div>
+
 </div>
 
     </> 
