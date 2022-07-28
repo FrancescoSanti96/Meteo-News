@@ -29,7 +29,7 @@ function Weather() {
 
   return (
     <>
-      <div className="container mx-auto pt-2 px-5 lg:px-60 ">
+      <div>
         {/* Weather */}
         {/* Insert the city */}
         <div className="flex">
@@ -40,6 +40,7 @@ function Weather() {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
+          {/* If the list is empty show button Cerca else show Anulla */}
           {Object.keys(list).length === 0 ? (
             <button
               className="text-primaryBg bg-send hover:bg-sendHover font-bold h-12 py-0 px-2 text-m rounded-md"
