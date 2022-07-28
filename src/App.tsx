@@ -2,25 +2,23 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeather } from "../src/redux/reducers/weatherSlice";
-
+import { TailSpin } from "react-loader-spinner";
 
 function App() {
-  // const [loader, setLoader] = useState<boolean>(false);
+  const [loader, setLoader] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
-  // const [weatherValue, setweatherValue] = useState([]);
 
-  // redux
+  //Redux
+  //Inizialize list for contain the result of the weather API
   const list = useSelector((state: any) => state.weather.weatherList);
   const dispatch = useDispatch();
 
+  //Function for consume the API and get the data.
   const sendCity = async () => {
     try {
-      const resp = await axios.get(
-        `http://api.weatherstack.com/current?access_key=8e2acd1175ae80673f3f74e84c2f3412&query=${inputValue}`
-      );
-      // console.log(resp.data);[]
+      const resp = await axios.get(`http://api.weatherstack.com/current?access_key=8e2acd1175ae80673f3f74e84c2f3412&query=${inputValue}`);
       dispatch(getWeather(resp?.data?.current));
-      // setLoader(true);
+      setLoader(false);
     } catch (error: any) {
       console.log(error.data);
       alert(`Error: ${error?.message || ""}`);
@@ -38,7 +36,7 @@ function App() {
     <div className='flex'>
     <input
           type="text"
-          className="text-xl sm:text-xxl block pl-2 h-12 rounded-md focus-visible:outline-primaryBg" 
+          className="text-xl sm:text-xxl block pl-2 h-12 rounded-md w-1/2 focus-visible:outline-primaryBg" 
           placeholder="Inserisci la città"
           onChange={(e) => setInputValue(e.target.value)}
           />
@@ -46,16 +44,44 @@ function App() {
     onClick={()=> {
       console.log(inputValue)
       sendCity();
-      // setLoader(true);
+      setLoader(true);
     }}
     >
     Cerca
     </button>
+
+    {/* Loading weather data from API */}
+    {loader && (
+            <span>
+              <TailSpin
+                height="50"
+                width="50"
+                color="#4d4d4d"
+                ariaLabel="loading"
+              />
+            </span>
+          )}
+
+    </div>
+    {/* Show result of the weather only if the object is full of data. */}
+    {Object.keys(list).length > 0 && (
+    <div className='flex items-center mt-4'>
+    <img src={list?.weather_icons} alt="weather_icons" className='inline'/>
+    <div className='ml-4'>
+
+    <h5>Temperatura: <b>{list?.temperature}</b></h5>
+    <h5>Descrizione: <b>{list?.weather_descriptions}</b></h5>
+    <h5>Umidità: <b>{list?.humidity}</b></h5>
+    <h5>Velocità vento: <b>{list?.wind_speed}</b></h5>
     </div>
 
+    </div>)
+    }
+
+ 
     <div>
 
-      {list.temperature}
+   
     
       {/* {list?.map((v, index)=> {
         console.log(v)

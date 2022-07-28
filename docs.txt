@@ -3,3 +3,20 @@ https://any-api.com/ , dopo di che ho deciso di creare un applicativo per il met
 
 Sono partito con una bozza di mockup e poi con le user stories per arrivare a creare una bacheca trello
 stule kanbam con i task suddivisi nel backlog e in "sprint" per importanza e difficolta.
+
+API:
+Meteo:
+https://weatherstack.com/usage
+Notizie:
+https://mediastack.com/login?u=https%3A%2F%2Fmediastack.com%2Fusage
+API: http://api.mediastack.com/v1/news?access_key=879bfe2758539fd63d1d8436d559ddb4&countries=it&sources=it&limit=10
+
+
+Link per api google:
+https://tasoskakour.com/blog/react-use-oauth2
+https://www.google.com/search?q=react+js+oauth2+example&sxsrf=ALiCzsZA0Bsk9pZmp1BzFtEv87bqld-ZMQ%3A1658840027328&ei=2-PfYpCuE562xc8PwKmL8As&oq=react+OAuth2.0&gs_lcp=Cgdnd3Mtd2l6EAEYBDIHCAAQHhCwAzILCAAQHhAPELADEAoyCAgAEIYDELADMggIABCGAxCwAzIICAAQhgMQsAMyCAgAEIYDELADSgQIQRgBSgQIRhgAUABYAGDrOGgDcAB4AIABAIgBAJIBAJgBAMgBBsABAQ&sclient=gws-wiz
+https://codesandbox.io/s/9z7249opkw
+https://fusionauth.io/blog/2021/11/11/how-to-authenticate-your-react-app
+https://www.npmjs.com/package/@react-oauth/google
+https://react-oauth.vercel.app/
+https://joegasewicz.github.io/react-google-oauth2.0/
