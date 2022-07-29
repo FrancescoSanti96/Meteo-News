@@ -8,6 +8,10 @@ Ho notato gia con i primi task di aver commesso lo sbaglio di renderli troppo ge
 comunque per gestire il Meteo ho inserito anche redux per la gestione dello sato, probabilmente overkill però ci devo prendere confidenza
 e comuqnue semplifica molto la gestione.
 
+pacchetti utilizzati:
+icone: @heroicons/react
+spinner: react-loader-spinner
+
 API:
 Meteo:
 https://weatherstack.com/usage
