@@ -17,7 +17,6 @@ Meteo:
 https://weatherstack.com/usage
 Notizie:
 https://mediastack.com/login?u=https%3A%2F%2Fmediastack.com%2Fusage
-API: http://api.mediastack.com/v1/news?access_key=879bfe2758539fd63d1d8436d559ddb4&countries=it&sources=it&limit=10
 
 
 Link per api google:
