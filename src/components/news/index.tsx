@@ -29,7 +29,6 @@ function News() {
     if (list.length === 0) {
       try {
         const resp = await axios.get(
-          // "fff"
           `http://api.mediastack.com/v1/news?access_key=879bfe2758539fd63d1d8436d559ddb4&countries=it&languages=it&limit=5`
         );
         dispatch(getNews(resp?.data?.data));
@@ -108,11 +107,11 @@ function News() {
         </span>
       )}
 
-      <div className="flex justify-center mt-5 flex-col sm:flex-row items-center">
+      <div className="flex justify-center mt-5 flex-col lg:flex-row items-center">
         {/* Use Map function for retrive from the list every item 'news' and visualize the card with the information */}
         {list?.map((it: any, index: any) => {
           return (
-            <div className="border-solid border-2 border-secondary w-56 h-96 relative">
+            <div className="border-solid border-2 border-secondary lg:w-56 w-80 h-96 relative">
               <img
                 className="rounded-t-lg px-5 py-2"
                 src={it.image}
