@@ -8,6 +8,7 @@ function App() {
     <>
     <div className="container mx-auto pt-2 px-5 lg:px-20 ">
       <div className="mt-5"><Weather /></div>
+      
       <div className="mt-5">
       <CalendarIcon
             className="h-10 w-10 sm:h-12 sm:w-12 inline mr-3"

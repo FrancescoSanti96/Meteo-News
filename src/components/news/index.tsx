@@ -13,6 +13,7 @@ import {
 function News() {
   const [loader, setLoader] = useState<boolean>(true);
 
+  type category = "valore1"|"valore2" 
   //Redux
   //Inizialize list for contain the result of the news API
   const list = useSelector((state: any) => state.news.newsList);
@@ -44,7 +45,7 @@ function News() {
   };
 
   //Function for get the news of a specific category but in english beacuse in italian dont't retrive date.
-  const sendNewsCategory = async (category: string) => {
+  const sendNewsCategory = async (category: "science"|"business"|"technology" ) => {
     try {
       const resp = await axios.get(
         `http://api.mediastack.com/v1/news?access_key=879bfe2758539fd63d1d8436d559ddb4&languages=en&categories=${category}&limit=5`
