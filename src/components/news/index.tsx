@@ -8,12 +8,13 @@ import {
   BeakerIcon,
   ChipIcon,
   ArrowNarrowRightIcon,
+  AnnotationIcon
 } from "@heroicons/react/outline";
 
 function News() {
   const [loader, setLoader] = useState<boolean>(true);
 
-  type category = "valore1"|"valore2" 
+  type category = "science"|"business" | "technology"
   //Redux
   //Inizialize list for contain the result of the news API
   const list = useSelector((state: any) => state.news.newsList);
@@ -23,6 +24,8 @@ function News() {
     sendNews();
   }, []);
 
+  const news_key = process.env.REACT_APP_NEWS_KEY;
+
   //Function for consume the API and get the data.
   const sendNews = async () => {
     // if the list are already saved in the store I show them otherwise I make the API call,
@@ -30,7 +33,7 @@ function News() {
     if (list.length === 0) {
       try {
         const resp = await axios.get(
-          `http://api.mediastack.com/v1/news?access_key=879bfe2758539fd63d1d8436d559ddb4&countries=it&languages=it&limit=5`
+          `http://api.mediastack.com/v1/news?access_key=aafcca053231eb52c0e2391e630cefc9&countries=it&languages=it&limit=5`
         );
         dispatch(getNews(resp?.data?.data));
         console.log(resp?.data?.data);
@@ -45,10 +48,10 @@ function News() {
   };
 
   //Function for get the news of a specific category but in english beacuse in italian dont't retrive date.
-  const sendNewsCategory = async (category: "science"|"business"|"technology" ) => {
+  const sendNewsCategory = async (category: category) => {
     try {
       const resp = await axios.get(
-        `http://api.mediastack.com/v1/news?access_key=879bfe2758539fd63d1d8436d559ddb4&languages=en&categories=${category}&limit=5`
+        `http://api.mediastack.com/v1/news?access_key=${news_key}&languages=en&categories=${category}&limit=5`
       );
       dispatch(getNews(resp?.data?.data));
       setLoader(false);
@@ -69,10 +72,14 @@ function News() {
             sendNewsCategory("science");
           }}
         >
-          <BeakerIcon
-            className="h-10 w-10 sm:h-12 sm:w-12 inline mr-3"
+          
+          <div>
+          <BeakerIcon className="h-10 w-10 sm:h-12 sm:w-12 inline mr-3"
             aria-hidden="true"
           />
+
+          </div>
+          
         </button>
         <button
           onClick={() => {

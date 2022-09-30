@@ -13,11 +13,13 @@ function Weather() {
   const list = useSelector((state: any) => state.weather.weatherList);
   const dispatch = useDispatch();
 
+  const weather_key = process.env.REACT_APP_WEATHER_KEY;
+
   //Function for consume the API and get the data.
   const sendCity = async () => {
     try {
       const resp = await axios.get(
-        `http://api.weatherstack.com/current?access_key=8e2acd1175ae80673f3f74e84c2f3412&query=${inputValue}`
+        `http://api.weatherstack.com/current?access_key=${weather_key}&query=${inputValue}`
       );
       dispatch(getWeather(resp?.data?.current));
       setLoader(false);
