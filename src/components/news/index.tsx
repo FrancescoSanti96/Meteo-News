@@ -8,15 +8,20 @@ import {
   BeakerIcon,
   ChipIcon,
   ArrowNarrowRightIcon,
-  AnnotationIcon
 } from "@heroicons/react/outline";
 
 function News() {
   const [loader, setLoader] = useState<boolean>(true);
+  const [newsCategoryIsActive, SetNewsCategoryIsActive] = useState<Boolean[]>([
+    false,
+    false,
+    false,
+  ]);
 
-  type category = "science"|"business" | "technology"
-  //Redux
-  //Inizialize list for contain the result of the news API
+  type category = "science" | "business" | "technology" ;
+  const news_key = process.env.REACT_APP_NEWS_KEY;
+
+  //Redux Inizialize list for contain the result of the news API
   const list = useSelector((state: any) => state.news.newsList);
   const dispatch = useDispatch();
 
@@ -24,26 +29,18 @@ function News() {
     sendNews();
   }, []);
 
-  const news_key = process.env.REACT_APP_NEWS_KEY;
-
   //Function for consume the API and get the data.
   const sendNews = async () => {
-    // if the list are already saved in the store I show them otherwise I make the API call,
-    // this case solve the problem if we add another page for not reload the date.
-    if (list.length === 0) {
-      try {
-        const resp = await axios.get(
-          `http://api.mediastack.com/v1/news?access_key=aafcca053231eb52c0e2391e630cefc9&countries=it&languages=it&limit=5`
-        );
-        dispatch(getNews(resp?.data?.data));
-        console.log(resp?.data?.data);
-        setLoader(false);
-      } catch (error: any) {
-        console.log(error.data);
-        alert(`Error: ${error?.message || ""}`);
-      }
-    } else {
+    try {
+      const resp = await axios.get(
+        `http://api.mediastack.com/v1/news?access_key=aafcca053231eb52c0e2391e630cefc9&countries=it&languages=it&limit=5`
+      );
+      dispatch(getNews(resp?.data?.data));
+      console.log(resp?.data?.data);
       setLoader(false);
+    } catch (error: any) {
+      console.log(error.data);
+      alert(`Error: ${error?.message || ""}`);
     }
   };
 
@@ -69,36 +66,46 @@ function News() {
         <button
           //onClick call the function and pass the specific categorie
           onClick={() => {
-            sendNewsCategory("science");
+            SetNewsCategoryIsActive([!newsCategoryIsActive[0], false, false]);
+            newsCategoryIsActive[0]
+              ? sendNews()
+              : sendNewsCategory("science");
           }}
         >
-          
           <div>
-          <BeakerIcon className="h-10 w-10 sm:h-12 sm:w-12 inline mr-3"
-            aria-hidden="true"
-          />
-
+            <BeakerIcon
+              className="h-10 w-10 sm:h-12 sm:w-12 inline mr-3"
+              aria-hidden="true"
+              style={{ color: newsCategoryIsActive[0] ? "red" : "" }}
+            />
           </div>
-          
         </button>
         <button
           onClick={() => {
-            sendNewsCategory("business");
+            SetNewsCategoryIsActive([false, !newsCategoryIsActive[1], false]);
+            newsCategoryIsActive[1]
+              ? sendNews()
+              : sendNewsCategory("business");
           }}
         >
           <CashIcon
             className="h-10 w-10 sm:h-12 sm:w-12 inline mr-3"
             aria-hidden="true"
+            style={{ color: newsCategoryIsActive[1] ? "red" : "" }}
           />
         </button>
         <button
           onClick={() => {
-            sendNewsCategory("technology");
+            SetNewsCategoryIsActive([false, false, !newsCategoryIsActive[2]]);
+            newsCategoryIsActive[2]
+              ? sendNews()
+              : sendNewsCategory("technology");
           }}
         >
           <ChipIcon
             className="h-10 w-10 sm:h-12 sm:w-12 inline"
             aria-hidden="true"
+            style={{ color: newsCategoryIsActive[2] ? "red" : "" }}
           />
         </button>
       </div>

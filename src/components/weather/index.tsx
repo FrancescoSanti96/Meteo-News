@@ -21,8 +21,16 @@ function Weather() {
       const resp = await axios.get(
         `http://api.weatherstack.com/current?access_key=${weather_key}&query=${inputValue}`
       );
-      dispatch(getWeather(resp?.data?.current));
-      setLoader(false);
+      
+      if (resp?.data?.current != null && resp?.data?.current != 'undefined' ) {
+        dispatch(getWeather(resp?.data?.current));
+        setLoader(false);
+      }
+      else {
+        alert(`Localita non presente`);
+        setLoader(false);
+      }
+      
     } catch (error: any) {
       console.log(error.data);
       alert(`Error: ${error?.message || ""}`);
